@@ -5,7 +5,7 @@ Extension functionality for the NightHawk operator client
 
 - **Plugin command** :: Introduces the 'plugin' command, which allows for the execution of .NET assemblies to automate / provide additional functionality to the base NH operator command suite, similar to Aggressor scripts from Cobalt Strike. These plugins have access to NightHawk functions through an intermediary dll that reflectively accesses functions in the NH Agent UI to run commands in beacons. Plugin names are all tab complete for ease of operator use, and so after entering the base plugin command you should be able to tab through the different loaded plugin modules.
 - **AutoRuns menu** :: Allows for configuration of plugins that will execute automatically upon new beacon check-in. Based on configuration of the plugins enabled, arg values will be prompted for at configuration time.
-- Additional opsec :: Commands can be filtered to stop certain risky commands detected by EDR from being passed in (e.g., "ps --detailed-info")
+- **Additional opsec** :: Commands can be filtered to stop certain risky commands detected by EDR from being passed in (e.g., "ps --detailed-info")
 
 ## Building
 
