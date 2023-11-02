@@ -252,7 +252,7 @@ namespace NHAPI
         {
             //locate BOF
             string fullPath = Directory.GetCurrentDirectory();
-            if(bofName.IndexOf(":\\") > -1 && File.Exists(fullPath))
+            if(bofName.IndexOf(":\\") > -1 && File.Exists(bofName))
             {
                 fullPath = bofName;
             }
